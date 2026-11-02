@@ -1,0 +1,63 @@
+Bank Loan Risk & Credit Default Prediction
+
+## Business Scenario & Objective
+
+A retail banking institution needs to assess credit risk for incoming loan applicants to determine whether they are likely to default on their loans (`default_flag`: 0 for non-default, 1 for default). With historical applicant data available—including age, annual income, credit scores, employment duration, loan amounts, and housing status—the risk analytics team needs to build a predictive classification model.
+
+Your objective is to build an end-to-end supervised machine learning pipeline using **Logistic Regression** to predict credit default risk, evaluate model classification performance, and persist the trained pipeline artifacts for automated loan approval scoring.
+
+---
+
+## Step-by-Step Implementation Requirements
+
+### Step 1: Discovery & Target Identification
+
+* **Objective:** Load the clean CSV dataset (`loan_risk_data.csv`), inspect class distributions, and separate predictive variables from the target variable.
+* **Tasks:**
+* Import the dataset using pandas and verify its dimensions and data types.
+* Drop non-predictive unique identifiers (such as `applicant_id`).
+* Separate the target classification column (`y = 'default_flag'`) from the predictor feature matrix (`X`).
+* Inspect the class balance of the target variable to understand default distribution.
+
+
+
+### Step 2: Categorical Encoding & Feature Engineering
+
+* **Objective:** Transform categorical attributes into numerical representations and construct engineered financial ratios.
+* **Tasks:**
+* Perform One-Hot Encoding on categorical variables (`housing_status`) using pandas (`pd.get_dummies()`).
+* Create an engineered feature, such as `loan_to_income_ratio` (computed as `loan_amount_k / annual_income_k`), to capture debt burden.
+* Inspect the transformed feature matrix dimensions and column names.
+
+
+
+### Step 3: Data Splitting & Feature Scaling
+
+* **Objective:** Partition the data into training and testing subsets and scale numerical features.
+* **Tasks:**
+* Perform a stratified train-test split (80% training, 20% testing) to preserve target class proportions.
+* Initialize scikit-learn's `StandardScaler`.
+* Fit the scaler **only** on the training set features and transform both the training and testing sets to prevent data leakage.
+
+
+
+### Step 4: Model Training & Test Set Evaluation
+
+* **Objective:** Train a linear classifier and evaluate its predictive performance.
+* **Tasks:**
+* Instantiate a `LogisticRegression` model and fit it using the scaled training data and target labels.
+* Generate predictions on the unseen test set.
+* Compute evaluation metrics including Accuracy, Confusion Matrix, and a detailed Classification Report (Precision, Recall, F1-Score).
+
+
+
+### Step 5: Model Persistence with Joblib
+
+* **Objective:** Save the trained machine learning pipeline artifacts for automated loan processing integration and future inference.
+* **Tasks:**
+* Use `joblib.dump()` to serialize and save the trained Logistic Regression model, fitted scaler, and feature list to disk (`.joblib` files).
+* Implement a verification test that reloads the saved artifacts back into memory.
+* Simulate scoring a new loan applicant record to output a real-time default risk prediction and probability.
+
+
+

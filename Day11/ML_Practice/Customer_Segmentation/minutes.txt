@@ -1,0 +1,63 @@
+
+# Project Problem Statement: Unsupervised Customer Segmentation for Retail Marketing
+
+## Business Scenario & Objective
+
+A major retail enterprise maintains a database of customer purchasing behaviors, annual incomes, and spending scores, but currently lacks structured customer segments. Without predefined labels or target categories, the marketing team needs to discover natural customer archetypes to tailor targeted campaigns, loyalty programs, and personalized promotions.
+
+Your objective is to build an end-to-end unsupervised machine learning pipeline using **K-Means Clustering** to segment customers into distinct groups and persist the trained pipeline artifacts for future automated customer scoring.
+
+---
+
+## Step-by-Step Implementation Requirements
+
+### Step 1: Discovery & Feature Selection
+
+* **Objective:** Load the unlabelled dataset (`customer_segmentation_data.csv`) and prepare the feature matrix.
+* **Tasks:**
+* Import the dataset using pandas and inspect its structure, data types, and dimensions.
+* Drop non-analytical unique identifiers (such as `customer_id`).
+* Select the core numerical behavioral features required for clustering: `annual_income_k`, `spending_score_1_100`, and `purchase_frequency_monthly`.
+
+
+
+### Step 2: Unsupervised Feature Scaling
+
+* **Objective:** Standardize the feature scales to ensure equal distance weighting.
+* **Tasks:**
+* Initialize scikit-learn's `StandardScaler`.
+* Fit and transform the selected feature matrix so that all attributes have a mean of $0$ and a variance of $1$, preventing variables with larger numerical ranges from dominating distance-based calculations.
+
+
+
+### Step 3: K-Means Model Induction & Labeling
+
+* **Objective:** Train an unsupervised clustering model to group customers.
+* **Tasks:**
+* Instantiate the `KMeans` algorithm from scikit-learn, setting the number of clusters ($k = 3$).
+* Fit the model on the scaled data and generate cluster labels for each customer record.
+* Append the assigned cluster IDs back into the dataset for analysis.
+
+
+
+### Step 4: Cluster Evaluation & Business Profiling
+
+* **Objective:** Evaluate cluster quality and interpret the business characteristics of each segment.
+* **Tasks:**
+* Compute the **Silhouette Score** using the scaled features and cluster labels to evaluate cluster cohesion and separation.
+* Group the original dataset by the assigned cluster IDs and calculate mean values for income, spending score, and purchase frequency.
+* Translate statistical cluster centroids into actionable business customer archetypes (e.g., Budget Shoppers, Balanced Buyers, Premium Conservative Shoppers).
+
+
+
+### Step 5: Model Persistence with Joblib
+
+* **Objective:** Save the trained unsupervised pipeline artifacts for production deployment.
+* **Tasks:**
+* Use `joblib.dump()` to serialize and save the trained K-Means model, fitted scaler, and feature list to disk.
+* Implement a verification test that loads the saved artifacts (`.joblib` files) back into memory.
+* Simulate scoring a brand-new customer profile to automatically assign them to their appropriate marketing cluster segment.
+
+
+
+---

@@ -1,0 +1,21 @@
+player_id,player_name,matches_played,runs_scored,batting_average,wickets_taken,bowling_economy
+P01,Virat Kohli,250,12000,55.5,4,8.5
+P02,Jasprit Bumrah,120,150,12.0,210,4.5
+P03,Ben Stokes,180,5500,36.5,160,5.2
+P04,Rohit Sharma,240,10500,48.2,8,7.8
+P05,Rashid Khan,140,800,18.0,190,6.1
+P06,Ravindra Jadeja,210,4800,32.4,200,5.0
+P07,Kane Williamson,190,8500,50.1,2,7.5
+P08,Trent Boult,130,200,10.5,220,4.8
+P09,Hardik Pandya,150,3800,31.0,130,5.5
+P10,Steve Smith,180,9200,53.2,5,8.0
+P11,Pat Cummins,140,1200,16.5,230,5.1
+P12,Shakib Al Hasan,230,7000,37.8,280,4.9
+P13,David Warner,220,9800,45.0,0,0.0
+P14,Mitchell Starc,135,450,14.2,240,5.3
+P15,Glenn Maxwell,150,4200,30.5,110,6.2
+P16,Babar Azam,200,9100,56.0,1,8.1
+P17,Kagiso Rabada,125,300,11.0,205,5.0
+P18,Axar Patel,110,2100,28.0,120,5.4
+P19,Joe Root,210,9500,49.5,30,6.0
+P20,Jos Buttler,190,7500,41.0,0,0.0

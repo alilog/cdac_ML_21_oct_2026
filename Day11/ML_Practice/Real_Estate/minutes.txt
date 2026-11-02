@@ -1,0 +1,64 @@
+# Project Problem Statement: End-to-End Supervised Regression Pipeline for Real Estate Valuation
+
+## Business Scenario & Objective
+
+A real estate investment and property valuation firm needs to accurately estimate residential housing prices based on structural characteristics, age, location types, and garage availability. With historical housing market data available, the analytics team needs to build a predictive regression model.
+
+Your objective is to build an end-to-end supervised machine learning pipeline using **Linear Regression** to predict housing prices, evaluate model regression performance, and persist the trained pipeline artifacts for automated property valuation on incoming real estate listings.
+
+---
+
+## Step-by-Step Implementation Requirements
+
+### Step 1: Discovery & Target Identification
+
+* **Objective:** Load the clean CSV dataset (`housing_ml_data.csv`), inspect structure, and separate predictive variables from the target variable.
+* **Tasks:**
+* Import the dataset using pandas and verify its dimensions and data types.
+* Drop non-predictive unique identifiers (such as `house_id`).
+* Separate the target continuous regression column (`y = 'price_usd'`) from the predictor feature matrix (`X`).
+* Inspect the shape of the features and target arrays.
+
+
+
+### Step 2: Categorical Encoding & Feature Engineering
+
+* **Objective:** Transform categorical attributes into numerical representations and construct engineered interaction features.
+* **Tasks:**
+* Perform One-Hot Encoding on categorical variables (`location_type`, `has_garage`) using pandas (`pd.get_dummies()`).
+* Create an engineered feature, such as `sqft_per_room` (computed as `square_feet / num_bedrooms`), to capture spatial efficiency.
+* Inspect the transformed feature matrix dimensions and column names.
+
+
+
+### Step 3: Data Splitting & Feature Scaling
+
+* **Objective:** Partition the data into training and testing subsets and scale numerical features.
+* **Tasks:**
+* Perform a standard train-test split (80% training, 20% testing).
+* Initialize scikit-learn's `StandardScaler`.
+* Fit the scaler **only** on the training set features and transform both the training and testing sets to prevent data leakage.
+
+
+
+### Step 4: Model Training & Test Set Evaluation
+
+* **Objective:** Train a regression model and evaluate its predictive performance.
+* **Tasks:**
+* Instantiate a `LinearRegression` model and fit it using the scaled training data and target values.
+* Generate price predictions on the unseen test set.
+* Compute evaluation metrics including Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R-Squared ($R^2$).
+
+
+
+### Step 5: Model Persistence with Joblib
+
+* **Objective:** Save the trained machine learning pipeline artifacts for production integration and future inference.
+* **Tasks:**
+* Use `joblib.dump()` to serialize and save the trained regression model, fitted scaler, and feature list to disk (`.joblib` files).
+* Implement a verification test that reloads the saved artifacts back into memory.
+* Simulate scoring a new property record to output a real-time price estimation.
+
+
+
+---

@@ -69,11 +69,11 @@ def phase_4_shared_birthday_cohort(df, player_name):
 
 def phase_5_evaluation_and_summary(df):
     """
-    [Phase 5] Evaluation & Reporting (5 Marks)
+    [Phase 5] Evaluation & Reporting 
     - Goal: Summarize statistical findings on player longevity, birth months, 
       and birthday coincidences.
     """
-    print("\n[PHASE 5] Evaluation & Summary Reporting (5 Marks)")
+    print("\n[PHASE 5] Evaluation & Summary Reporting ")
     print("-" * 65)
     # TODO: Print final summary statistics regarding dataset coverage and duplicate birthdays
     pass
@@ -88,7 +88,7 @@ def run_analytics_lifecycle():
     Facade function coordinating the NBA analytics and birthday lookup workflow.
     """
     print("=" * 65)
-    print("STARTING NBA BIRTHDAY & BIOGRAPHICAL LIFECYCLE (Out of 40 Marks)")
+    print("STARTING NBA BIRTHDAY & BIOGRAPHICAL LIFECYCLE ")
     print("=" * 65)
     
     # Target player to test lookup and shared birthdays

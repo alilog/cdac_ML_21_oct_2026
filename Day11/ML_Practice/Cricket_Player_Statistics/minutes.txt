@@ -1,0 +1,62 @@
+Cricket Player Statistics.
+
+# Project Problem Statement: Unsupervised Cricket Player Role Segmentation
+
+## Business Scenario & Objective
+
+A cricket analytics franchise maintains historical career statistics for international players across runs, batting averages, wickets taken, and bowling economy rates, but lacks explicit categorization tags. Without predefined labels, team selectors and analysts need to automatically group players into distinct functional archetypes (**Specialist Batsmen**, **Specialist Bowlers**, and **All-Rounders**) to build balanced team squads.
+
+Your objective is to build an end-to-end unsupervised machine learning pipeline using **K-Means Clustering** to segment players based on their multi-dimensional performance metrics and persist the trained clustering artifacts for automated player evaluation.
+
+---
+
+## Step-by-Step Implementation Requirements
+
+### Step 1: Discovery & Feature Selection
+
+* **Objective:** Load the unlabelled cricket dataset (`cricket_player_stats.csv`) and prepare the feature matrix.
+* **Tasks:**
+* Import the dataset using pandas and inspect its structure, data types, and dimensions.
+* Drop non-analytical identifiers (such as `player_id` and `player_name` from the feature matrix while keeping player names for final profiling).
+* Select core numerical performance metrics required for clustering: `runs_scored`, `batting_average`, `wickets_taken`, and `bowling_economy`.
+
+
+
+### Step 2: Unsupervised Feature Scaling
+
+* **Objective:** Standardize feature scales to ensure equal distance weighting across batting and bowling statistics.
+* **Tasks:**
+* Initialize scikit-learn's `StandardScaler`.
+* Fit and transform the selected performance feature matrix so that all attributes have a mean of $0$ and a variance of $1$, preventing metrics with larger numerical ranges (like runs scored) from overpowering bowling metrics.
+
+
+
+### Step 3: K-Means Model Induction & Labeling
+
+* **Objective:** Train an unsupervised clustering model to segment players into three functional roles.
+* **Tasks:**
+* Instantiate the `KMeans` algorithm from scikit-learn, setting the number of clusters to $k = 3$.
+* Fit the model on the scaled data and generate cluster labels for each player record.
+* Append the assigned cluster IDs back into the dataset for analysis.
+
+
+
+### Step 4: Cluster Evaluation & Role Profiling
+
+* **Objective:** Evaluate cluster separation quality and interpret the statistical centroids of each player group.
+* **Tasks:**
+* Compute the **Silhouette Score** using the scaled features and cluster labels to measure cluster cohesion.
+* Group the original dataset by the assigned cluster IDs and calculate mean performance metrics for each group.
+* Translate statistical cluster centroids into tactical cricket archetypes (e.g., Top-Order Batsmen, Pace/Spin Bowlers, and Balanced All-Rounders).
+
+
+
+### Step 5: Model Persistence with Joblib
+
+* **Objective:** Save the trained unsupervised pipeline artifacts for future player scouting and automated role classification.
+* **Tasks:**
+* Use `joblib.dump()` to serialize and save the trained K-Means model, fitted scaler, and feature list to disk (`.joblib` files).
+* Implement a verification test that loads the saved artifacts back into memory.
+* Simulate scoring a newly drafted player's career statistics to automatically categorize them into their respective role cluster.
+
+

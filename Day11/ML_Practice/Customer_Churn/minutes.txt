@@ -1,0 +1,63 @@
+# Project Problem Statement: Supervised Customer Churn Prediction & Retention Analytics
+
+## Business Scenario & Objective
+
+A subscription-based telecommunications service provider is experiencing customer attrition and needs to proactively identify subscribers who are at high risk of canceling their service. With historical customer data available—including tenure, monthly charges, support interaction counts, and contract types—the analytics team needs to build a predictive classification model.
+
+Your objective is to build an end-to-end supervised machine learning pipeline using a **Random Forest Classifier** to predict customer churn, evaluate model classification performance, and persist the trained pipeline artifacts for automated scoring on incoming subscriber data.
+
+---
+
+## Step-by-Step Implementation Requirements
+
+### Step 1: Discovery & Target Identification
+
+* **Objective:** Load the clean CSV dataset (`customer_churn_data.csv`), inspect class distributions, and separate predictive variables from the target variable.
+* **Tasks:**
+* Import the dataset using pandas and verify its dimensions and data types.
+* Drop non-predictive unique identifiers (such as `customer_id`).
+* Separate the target classification column (`y = 'churn_flag'`) from the predictor feature matrix (`X`).
+* Inspect the class balance of the target variable to understand churn distribution.
+
+
+
+### Step 2: Categorical Encoding & Feature Engineering
+
+* **Objective:** Transform categorical attributes into numerical representations and construct engineered interaction features.
+* **Tasks:**
+* Perform One-Hot Encoding on categorical variables (`contract_type`, `internet_service`) using pandas (`pd.get_dummies()`).
+* Create an engineered feature, such as `avg_monthly_spend` (computed as `total_charges / tenure_months`), to capture spending behavior patterns.
+* Inspect the transformed feature matrix dimensions and column names.
+
+
+
+### Step 3: Data Splitting & Feature Scaling
+
+* **Objective:** Partition the data into training and testing subsets and scale numerical features.
+* **Tasks:**
+* Perform a stratified train-test split (80% training, 20% testing) to preserve target class proportions.
+* Initialize scikit-learn's `StandardScaler`.
+* Fit the scaler **only** on the training set features and transform both the training and testing sets to prevent data leakage.
+
+
+
+### Step 4: Model Training & Test Set Evaluation
+
+* **Objective:** Train a robust ensemble classifier and evaluate its predictive performance.
+* **Tasks:**
+* Instantiate a `RandomForestClassifier` and fit the model using the scaled training data and target labels.
+* Generate predictions on the unseen test set.
+* Compute evaluation metrics including Accuracy, Confusion Matrix, and a detailed Classification Report (Precision, Recall, F1-Score).
+
+
+
+### Step 5: Model Persistence with Joblib
+
+* **Objective:** Save the trained machine learning pipeline artifacts for production integration and future inference.
+* **Tasks:**
+* Use `joblib.dump()` to serialize and save the trained Random Forest model, fitted scaler, and feature list to disk (`.joblib` files).
+* Implement a verification test that reloads the saved artifacts back into memory.
+* Simulate scoring a new customer record to output a real-time churn prediction and risk probability.
+
+
+
